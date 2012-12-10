@@ -159,6 +159,12 @@ class ChannelOwner(channelParams: Option[ChannelParameters] = None) extends Acto
     case Event(QueueUnbind(queue, exchange, routing_key, args), Connected(channel)) => {
       stay replying withChannel(channel)(c => c.queueUnbind(queue, exchange, routing_key, args))
     }
+    case Event(ExchangeBind(destination, source, routingKey, args), Connected(channel)) => {
+      stay replying withChannel(channel)(c => c.exchangeBind(destination, source, routingKey, args))
+    }
+    case Event(ExchangeUnbind(destination, source, routingKey, args), Connected(channel)) => {
+      stay replying withChannel(channel)(c => c.exchangeUnbind(destination, source, routingKey, args))
+    }
   }
 
   onTransition {

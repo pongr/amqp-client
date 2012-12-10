@@ -84,6 +84,10 @@ object Amqp {
 
   case class Binding(exchange: ExchangeParameters, queue: QueueParameters, routingKey: String, autoack: Boolean)
 
+  case class ExchangeBind(destination: String, source: String, routingKey: String, args: Map[String, AnyRef] = Map.empty)
+
+  case class ExchangeUnbind(destination: String, source: String, routingKey: String, args: Map[String, AnyRef] = Map.empty)
+
   case class Delivery(consumerTag: String, envelope: Envelope, properties: BasicProperties, body: Array[Byte])
 
   case class Publish(exchange: String, key: String, body: Array[Byte], properties: Option[BasicProperties] = None, mandatory: Boolean = true, immediate: Boolean = false)
